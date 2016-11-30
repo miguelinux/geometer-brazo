@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# this is set up with the extra layer since the python wrapper needs exceptions
+# but I didn't want to have two sets of defines
+#BARECXXFLAGS= -fPIC -g -Wall -D_REENTRANT 
+BARECXXFLAGS=-Wall
+#CXXFLAGS= $(BARECXXFLAGS) -fno-exceptions 
+CXXFLAGS=${BARECXXFLAGS}
+
+CXXINC=-I/usr/local/Aria/include
+CXXLINK="-L/usr/local/Aria/lib -lAria -lpthread -ldl -lrt "
+
+CXXSTATICLINK="-Llib -Xlinker -Bstatic -lAria -Xlinker -Bdynamic -lpthread -ldl -lrt -Xlinker -Bstatic -lstdc++ -Xlinker -Bdynamic"
+
+
+echo g++ brazo.cpp ${CXXFLAGS} ${CXXINC} ${CXXLINK} -o brazo
+g++ brazo.cpp ${CXXFLAGS} ${CXXINC} ${CXXLINK} -o brazo
+
